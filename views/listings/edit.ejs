@@ -1,24 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Listing</title>
-</head>
-<body>
-    <h3>Edit Listing</h3>
-    <form action="/listings/<%= listing._id %>?_method=PUT" method="POST">
-    <textarea name="listing[title]" placeholder="Edit Title" cols="40" rows="5"><%= listing.title %></textarea>
-    <br>
-    <textarea name="listing[description]" placeholder="Edit Description" cols="40" rows="5"><%= listing.description %></textarea>        
-    <br>
-    <textarea name="listing[image][url]" placeholder="Edit Image URL/Link" cols="40" rows="5"><%= listing.image.url %></textarea>
-    <br>    
-    <textarea name="listing[price]" placeholder="Edit Price" cols="40" rows="5"><%= listing.price %></textarea>
-    <br>
-    <textarea name="listing[location]" placeholder="Edit Location" cols="40" rows="5"><%= listing.location %></textarea>
-    <br>
-    <button type="submit">Update Listing</button>
-    </form>
-</body>
-</html>
+<% layout('layouts/boilerplate') %>
+<div class="row mt-3">
+    <div class="col-8 offset-2">
+        <h3>Edit Listing</h3>
+        <br>
+        <form action="/listings/<%= listing._id %>?_method=PUT" method="POST">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <textarea name="listing[title]" placeholder="Edit Title"  class="form-control"><%= listing.title %></textarea>
+        </div>
+        <br>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="listing[description]" placeholder="Edit Description"  class="form-control"><%= listing.description %></textarea>    
+        </div>    
+        <br>
+        <div class="mb-3">
+            <label for="image" class="form-label">Image URL</label>
+            <textarea name="listing[image][url]" placeholder="Edit Image URL/Link"  class="form-control"><%= listing.image.url %></textarea>
+        </div>
+        <br>
+        <div class="row">
+            <div class="mb-3 col-md-4">
+                <label for="price" class="form-label">Price</label>    
+                <textarea name="listing[price]" placeholder="Edit Price"  class="form-control"><%= listing.price %></textarea>
+            </div>
+            <div class="mb-3 col-md-8">
+                <label for="country" class="form-label">Country</label>    
+                <textarea name="listing[country]" placeholder="Edit Country"  class="form-control"><%= listing.country %></textarea>
+            </div>
+        </div>
+        <br>
+        <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <textarea name="listing[location]" placeholder="Edit Location"  class="form-control"><%= listing.location %></textarea>
+        </div>
+        <button type="submit" class="btn btn-dark edit-btn mt-3">Update Listing</button>
+        <br><br>
+        </form>
+    </div>
+</div>
