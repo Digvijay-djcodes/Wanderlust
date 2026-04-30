@@ -1,3 +1,34 @@
+<style>
+  .search-btn {
+    background-color: #fe424d;
+    color: white;
+    border-radius: 25px;
+    padding: 0 1rem 0 1rem;
+  }
+  .search-btn i {
+    display: inline;
+    margin-right: 0.5rem;
+  }
+  .search-btn:hover {
+    background-color: white;
+    color: #fe424d;
+    border: 1px solid #fe424d;
+  }
+  .search-btn:focus {
+    background-color: #fe424d;
+    color: white;
+    border-radius: 25px;
+    padding: 0 1rem 0 1rem;
+    box-shadow: 0 0 0 0.25rem rgba(254, 66, 77, 0.5);
+  }
+  .search-input {
+    border-radius: 25px;
+    border: 1px solid #ced4da;
+    padding: 0.5rem 3rem 0.5rem 3rem;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+
+</style>
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
@@ -5,16 +36,15 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link"  href="/listings">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"  href="/listings">All Listings</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/listings/new">Add new Listing</a>
-        </li>
+      <div class="navbar-nav">
+          <a class="nav-link explore"  href="/listings">Explore</a>
+      </div>
+      <div class="navbar-nav ms-auto me-auto mt-auto mb-auto">
+          <form class="d-flex " role="search">
+            <input class="form-control me-2 search-input" type="search" placeholder="Search  Destinations" aria-label="Search"/>
+            <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+          </form>
+      </div>
         <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown
@@ -26,11 +56,14 @@
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
         </li> -->
-      </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    </div>
+      <div class="navbar-nav">
+        <a class="nav-link new-listing" href="/listings/new" >List Your Stay</a>
+        <% if(!currentUser) { %>
+          <a class="nav-link signup" href="/signup"><b>Signup</b></a>
+          <a class="nav-link login" href="/login"><b>Login</b></a>
+        <% } else { %>
+          <a class="nav-link logout" href="/logout">Logout</a>
+        <% } %>
+      </div>
   </div>
 </nav>

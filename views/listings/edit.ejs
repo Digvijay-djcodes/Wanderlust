@@ -3,37 +3,52 @@
     <div class="col-8 offset-2">
         <h3>Edit Listing</h3>
         <br>
-        <form action="/listings/<%= listing._id %>?_method=PUT" method="POST">
-        <div class="mb-3">
-            <label for="title" class="form-label">Title</label>
-            <textarea name="listing[title]" placeholder="Edit Title"  class="form-control"><%= listing.title %></textarea>
-        </div>
-        <br>
-        <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <textarea name="listing[description]" placeholder="Edit Description"  class="form-control"><%= listing.description %></textarea>    
-        </div>    
-        <br>
-        <div class="mb-3">
-            <label for="image" class="form-label">Image URL</label>
-            <textarea name="listing[image][url]" placeholder="Edit Image URL/Link"  class="form-control"><%= listing.image.url %></textarea>
-        </div>
-        <br>
-        <div class="row">
-            <div class="mb-3 col-md-4">
-                <label for="price" class="form-label">Price</label>    
-                <textarea name="listing[price]" placeholder="Edit Price"  class="form-control"><%= listing.price %></textarea>
+        <form action="/listings/<%= listing._id %>?_method=PUT" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <textarea name="listing[title]" placeholder="Edit Title"  class="form-control" required><%= listing.title %></textarea>
+                <div class="invalid-feedback">
+                    Please enter a valid title.
+                </div>
             </div>
-            <div class="mb-3 col-md-8">
-                <label for="country" class="form-label">Country</label>    
-                <textarea name="listing[country]" placeholder="Edit Country"  class="form-control"><%= listing.country %></textarea>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea name="listing[description]" placeholder="Edit Description"  class="form-control" required><%= listing.description %></textarea> 
+                <div class="invalid-feedback">
+                    Please enter a valid description.
+                </div>   
             </div>
-        </div>
-        <br>
-        <div class="mb-3">
-            <label for="location" class="form-label">Location</label>
-            <textarea name="listing[location]" placeholder="Edit Location"  class="form-control"><%= listing.location %></textarea>
-        </div>
+            <div class="mb-3">
+                <p style="margin-bottom: 7px;">Original Image</p>
+                <img src="<%= listing.image.url %>" alt="Listing Image" style=" max-height: 250px; object-fit: cover;" class="img-fluid rounded" style="margin-top: 10px;">
+            </div>    
+            <div class="mb-3">
+                <label for="image" class="form-label">Upload Image</label>
+                <input name="listing[image]" placeholder="Edit Image URL/Link"  class="form-control" type="file">
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="price" class="form-label">Price</label>    
+                    <textarea name="listing[price]" placeholder="Edit Price"  class="form-control" required><%= listing.price %></textarea>
+                    <div class="invalid-feedback">
+                    Please enter a valid price.
+                    </div>
+                </div>
+                <div class="mb-3 col-md-8">
+                    <label for="country" class="form-label">Country</label>    
+                    <textarea name="listing[country]" placeholder="Edit Country"  class="form-control" required><%= listing.country %></textarea>
+                    <div class="invalid-feedback">
+                    Please enter a valid country.
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="location" class="form-label">Location</label>
+                <textarea name="listing[location]" placeholder="Edit Location"  class="form-control" required><%= listing.location %></textarea>
+                <div class="invalid-feedback">
+                    Please enter a valid location.
+                </div>
+            </div>
         <button type="submit" class="btn btn-dark edit-btn mt-3">Update Listing</button>
         <br><br>
         </form>
