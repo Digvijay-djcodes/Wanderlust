@@ -7,8 +7,31 @@ const {isloggedIn,isOwner,validateListing}=require('../middleware.js');
 
 
 module.exports.index=(async(req,res)=>{
-    const  allListings=await Listing.find({});
-    res.render("listings/index.ejs",{allListings});
+    let filter = {};
+
+  // 🔍 SEARCH (title + location)
+    if (req.query.search && req.query.search.trim() !== "") {
+        filter.$or = [
+            { location: { $regex: req.query.search, $options: "i" } },
+            { title: { $regex: req.query.search, $options: "i" } },
+            {country: { $regex: req.query.search, $options: "i" } },
+    ];
+}
+  // 🏷️ CATEGORY FILTER
+    if (req.query.category && req.query.category !== "") {
+        if (req.query.category){
+            filter.category={
+                $regex: `^${req.query.category}$`,
+                $options: "i"
+            }
+        }
+    }
+    const  allListings=await Listing.find(filter);
+    res.render("listings/index.ejs", {  
+    allListings,  
+    search: req.query.search,  
+    category: req.query.category  
+});
 });
 
 module.exports.renderNewForm=(req,res)=>{

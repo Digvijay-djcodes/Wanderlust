@@ -6,16 +6,45 @@
 <div class="row mt-3">
     <div class="col-8 offset-3">    
         <h3><%= listing.title %></h3>
+        <br>
     </div>
         <div class="card col-6 offset-3 listing-card">
             <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing_image">
             <div class="card-body">
                 <p class="card-text">
+                    <br>
                     <strong>Owner:</strong> <%= listing.owner.username %> <br>
-                    <%= listing.description %> <br>
-                    &#8377; <%= listing.price.toLocaleString("en-IN") %> <br>
-                    <%= listing.location %> <br>
-                    <%= listing.country %> <br>
+                    <strong>Category:</strong> <%= listing.category %> <br>
+                    <strong>Description:</strong> <%= listing.description %> <br>
+                    <strong>Location:</strong> <%= listing.location %> <br>
+                    <strong>Country:</strong> <%= listing.country %> <br>
+    <div class="price-row">
+
+        <div class="price">
+            ₹ 
+            <span id="basePrice">
+            <%= listing.price.toLocaleString("en-IN") %>
+            </span>
+
+            <span id="taxPrice" style="display: none;">
+               <%= Math.round(listing.price * 1.18).toLocaleString("en-IN") %>
+            </span>
+
+            <span class="per-night"> / night</span>
+        </div>
+
+        <div class="tax-toggle">
+    
+            <label class="switch">
+            <input type="checkbox" id="taxToggle">
+            <span class="slider"></span>
+            </label>
+
+            <span class="toggle-text">Display Total After Taxes</span>
+
+        </div>
+
+</div>
                     
                 </p>
             </div>
@@ -111,3 +140,87 @@
 
 <script src="/js/map.js"></script>
     <br>
+
+<style>
+.price-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.tax-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* SWITCH */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 22px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 34px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.3s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+input:checked + .slider {
+  background-color: #fe424d;
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+.toggle-text {
+  font-size: 0.9rem;
+  color: #555;
+}
+</style>
+
+<script>
+const toggle = document.getElementById("taxToggle");
+const basePrice = document.getElementById("basePrice");
+const taxPrice = document.getElementById("taxPrice");
+
+if (toggle) {
+    toggle.addEventListener("change", () => {
+        if (toggle.checked) {
+            basePrice.style.display = "none";
+            taxPrice.style.display = "inline";
+        } else {
+            basePrice.style.display = "inline";
+            taxPrice.style.display = "none";
+       }  
+});
+}
+</script>
