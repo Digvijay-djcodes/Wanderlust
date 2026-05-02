@@ -13,6 +13,8 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const User = require('./models/user.js');
 const LocalStrategy = require('passport-local').Strategy;
+const{isloggedIn}=require('./middleware.js');
+require("./config/passport");
 
 
 app.set('view engine','ejs');
@@ -38,7 +40,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id); // 🔥 always fresh from DB
+    done(null, user);
+  } catch (err) {
+    done(err, null);
+  }
+});
 app.use(flash());
 
 app.use((req,res,next)=>{

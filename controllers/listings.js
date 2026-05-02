@@ -9,7 +9,7 @@ const {isloggedIn,isOwner,validateListing}=require('../middleware.js');
 module.exports.index=(async(req,res)=>{
     let filter = {};
 
-  // 🔍 SEARCH (title + location)
+  // SEARCH (title + location)
     if (req.query.search && req.query.search.trim() !== "") {
         filter.$or = [
             { location: { $regex: req.query.search, $options: "i" } },
@@ -17,7 +17,7 @@ module.exports.index=(async(req,res)=>{
             {country: { $regex: req.query.search, $options: "i" } },
     ];
 }
-  // 🏷️ CATEGORY FILTER
+  // CATEGORY FILTER
     if (req.query.category && req.query.category !== "") {
         if (req.query.category){
             filter.category={

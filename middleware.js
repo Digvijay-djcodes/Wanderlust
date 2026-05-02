@@ -64,3 +64,10 @@ module.exports.isReviewAuthor=async(req,res,next)=>{
     }
     next();
 }
+
+module.exports.ensurePasswordSet = (req, res, next) => {
+  if (req.user && req.user.googleId && !req.user.passwordSet) {
+    return res.redirect("/set-password");
+  }
+  next();
+};
