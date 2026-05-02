@@ -3,6 +3,7 @@ console.log("MAP_TOKEN in listings.js:", process.env.MAP_TOKEN);
 const mongoose = require('mongoose');
 const initdata=require('./data.js');
 const listing=require("../models/listing.js");
+const user=require("../models/user.js");
 const fetch = require("node-fetch");
 
 main() // promise object returned
@@ -20,6 +21,15 @@ async function main(){
 const initDB = async () => {
   // 1. Delete old data
     await listing.deleteMany({});
+    await user.deleteMany({});
+
+  //Creating a new user to assign as owner of listings
+    const newUser = new user({
+        username: "admin",
+        email: "admin@example.com"
+    });
+    const registeredUser = await user.register(newUser, process.env.ADMIN_PASSWORD);
+    await newUser.save();
 
     let newData = [];
 
@@ -46,7 +56,7 @@ const initDB = async () => {
       // 6. Push updated object
         newData.push({
         ...obj,
-        owner: "69f1b0314db8aa38c3fd3385", // keep your existing owner
+        owner: registeredUser._id, // Assigning the new user as owner
         geometry: {
             type: "Point",
             coordinates: coordinates,
@@ -62,7 +72,7 @@ const initDB = async () => {
   // 7. Insert updated data
     await listing.insertMany(newData);
 
-    console.log("✅ Database initialized with coordinates");
+    console.log(" Database initialized with coordinates");
 };
 
 initDB();

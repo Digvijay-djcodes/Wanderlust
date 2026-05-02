@@ -25,7 +25,7 @@ app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, 'public')));
 
 const sessionOptions = {
-    secret: 'thisshouldbeabettersecret',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -42,7 +42,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await User.findById(id); // 🔥 always fresh from DB
+    const user = await User.findById(id); // always fresh from DB
     done(null, user);
   } catch (err) {
     done(err, null);
