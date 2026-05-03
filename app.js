@@ -9,6 +9,7 @@ const listingRoutes=require('./routes/listing.js');
 const reviewRoutes=require('./routes/review.js'); 
 const userRoutes=require('./routes/user.js'); 
 const session = require('express-session'); 
+const MongoStore = require('connect-mongo').default;
 const flash = require('connect-flash');
 const passport = require('passport');
 const User = require('./models/user.js');
@@ -28,6 +29,13 @@ const sessionOptions = {
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
+    store: MongoStore.create({
+        mongoUrl: process.env.ATLASDB_URL,
+        crypto: {
+            secret: process.env.SESSION_SECRET
+        },
+        TouchAfter: 24 * 3600 // time period in seconds
+    }),
     cookie: {
         httpOnly: true,
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7, // 1 week
