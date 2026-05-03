@@ -1,103 +1,180 @@
-# 🌍 WanderLust
+# 🌍 Wanderlust
 
-WanderLust is a full-stack web application built as part of my learning-by-building journey to practice real-world backend and full-stack development concepts.
-
-The project focuses on understanding how server-side applications are structured, how data flows through routes and views, and how CRUD-based applications are implemented in a practical scenario.
-
-This is a learning-focused project inspired by Airbnb, but it is NOT a full Airbnb clone. The goal is to build a simplified listing platform while strengthening backend fundamentals and frontend–backend integration.
+A full-stack travel listing platform — built with scalable architecture, secure authentication, and real-world deployment practices.
 
 ---
 
-## 🚧 Project Status
-Work in Progress
+## ✨ Overview
 
-The project is being developed incrementally with a strong focus on:
-- Backend correctness
-- RESTful routing
-- Database-driven views
-- Real-world layout debugging
+Wanderlust is a complete full-stack web application where users can explore travel destinations, create listings, and interact through reviews.
 
-rather than rushing features or UI polish.
+Unlike basic CRUD apps, this project focuses on real-world backend design, authentication flows, and deployment-ready practices.
 
 ---
 
-## ✨ Features Implemented So Far
+## 🧠 Key Highlights
 
-- Complete CRUD operations for listings
-- RESTful routing using Express.js
-- Dynamic routes for individual listings
-- MongoDB integration using Mongoose
-- Schema and model design
-- Server-side rendering with EJS templates
-- Dedicated pages:
-  - Listings Index
-  - Create Listing
-  - Edit Listing
-  - Show Listing
-- Form handling using express.urlencoded()
-- Bootstrap-based responsive UI
-  - Grid system
-  - Cards
-  - Offsets
-- Hands-on debugging of layout alignment, component flow, and routing issues
+- 🔐 Hybrid Authentication System  
+  - Username & Password login  
+  - Google OAuth login  
+  - Seamless account handling & password setup for OAuth users  
 
----
+- 🗺️ Geolocation Integration  
+  - Address → Coordinates conversion using Geoapify  
+  - Interactive maps with dynamic markers  
 
-## 🛠️ Tech Stack Used So Far
+- 🔎 Advanced Search & Filtering  
+  - Multi-field search (title, location, country)  
+  - Category-based filtering  
+  - Case-insensitive matching  
 
-Backend:
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
+- ☁️ Cloud Media Storage  
+  - Image uploads handled via Cloudinary  
+  - Optimized image delivery  
 
-Frontend:
-- EJS (Embedded JavaScript Templates)
-- Bootstrap 5
-- HTML5
-- CSS3
-- JavaScript
+- 🔄 Persistent Sessions  
+  - MongoDB-backed session store (connect-mongo)  
+  - Scalable and production-ready  
 
-Tools:
-- Git & GitHub
-- VS Code
-- Nodemon
+- 🛡️ Authorization & Security  
+  - Ownership-based access control  
+  - Protected routes using middleware  
+
+- ⚙️ Deployment Ready  
+  - Environment-based configuration  
+  - MongoDB Atlas integration  
+  - Node engine configuration  
 
 ---
 
-## ▶️ Getting Started
+## 🏗️ Architecture
 
-Prerequisites:
-- Node.js installed
-- MongoDB (local or cloud)
+Client (EJS + Bootstrap)  
+↓  
+Express Server (Routing Layer)  
+↓  
+Controllers (Business Logic)  
+↓  
+Mongoose Models (Data Layer)  
+↓  
+MongoDB Atlas (Database)  
 
-Installation & Setup:
-1. Clone the repository
-2. Install dependencies using `npm install`
-3. Create a `.env` file and add your MongoDB connection string
-4. Start the server using `node app.js`
-5. Open `http://localhost:8080` in your browser
-
----
-
-## 🔮 Planned Features (Upcoming Milestones)
-
-- Authentication & Authorization
-  - User signup & login
-  - Secure sessions
-  - Restrict edit/delete actions to listing owners
-- User-specific functionality
-  - Linking listings to users
-  - Middleware-based access control
-- Feature enhancements & polish
-  - Better UI consistency
-  - Error handling & validations
-- Deployment & production readiness
-  - Environment configuration
-  - Preparing the app for live deployment
+External Services:  
+- Cloudinary (Images)  
+- Geoapify (Maps & Geocoding)  
+- Google OAuth (Authentication)  
 
 ---
 
-## 📌 Learning Focus
+## 🚀 Features
 
-This project is part of my journey to move beyond tutorials and understand how real-world web applications are built, debugged, and improved step by step.
+### 🏡 Listings
+- Create, edit, and delete listings  
+- Upload images with cloud storage  
+- Automatic geocoding of location  
+- Category-based classification  
+
+### 🔍 Search & Filter
+- Search by title, location, or country  
+- Category filters (Beach, Mountains, Castles, etc.)  
+- Handles case sensitivity and partial matches  
+
+### ⭐ Reviews
+- Add and delete reviews  
+- Linked with user accounts  
+- Safe handling of deleted users (no crashes)  
+
+### 🔐 Authentication Flow
+- Google login → forced password setup  
+- Traditional login supported  
+- Prevents duplicate accounts  
+- Handles edge cases properly  
+
+### 💰 Pricing UX
+- Toggle between base price and price including taxes (18% GST)  
+
+---
+
+## 🛠️ Tech Stack
+
+Frontend: EJS, Bootstrap, JavaScript  
+Backend: Node.js, Express  
+Database: MongoDB Atlas, Mongoose  
+Auth: Passport.js, Google OAuth  
+Storage: Cloudinary  
+Maps: Geoapify  
+Sessions: connect-mongo  
+
+---
+
+## 📂 Project Structure
+
+Wanderlust/  
+│── models/  
+│── routes/  
+│── controllers/  
+│── views/  
+│── public/  
+│── utils/  
+│── config/  
+│── app.js  
+│── package.json  
+
+---
+
+## ⚙️ Setup & Installation
+
+### 1. Clone the repository
+git clone https://github.com/Digvijay-djcodes/wanderlust.git  
+cd wanderlust  
+
+### 2. Install dependencies
+npm install  
+
+### 3. Configure environment variables (.env)
+
+ATLASDB_URL=your_mongodb_atlas_url  
+SESSION_SECRET=your_session_secret  
+CLOUD_NAME=your_cloud_name  
+CLOUD_API_KEY=your_key  
+CLOUD_API_SECRET=your_secret  
+MAP_TOKEN=your_geoapify_key  
+GOOGLE_CLIENT_ID=your_client_id  
+GOOGLE_CLIENT_SECRET=your_client_secret  
+
+### Demo / Seed User
+
+A default user can be created using the seed script.
+
+Run:
+node init/index.js
+
+You can modify the credentials inside the seed file before running it.
+
+
+### 4. Run the application
+npm start  
+
+### 5. Open in browser
+http://localhost:8080  
+
+---
+
+## 📈 What Makes This Project Strong
+
+- Real-world authentication flow (OAuth + Local)  
+- Clean MVC architecture  
+- Handles edge cases (deleted users, auth conflicts)  
+- Uses production tools (Cloudinary, Atlas, Sessions)  
+- Deployment-ready structure  
+
+---
+
+## 🔮 Future Improvements
+
+- Booking system with calendar  
+- Payment gateway integration  
+- Wishlist feature  
+- Advanced filters (price range, ratings)  
+
+---
