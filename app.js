@@ -79,18 +79,17 @@ async function main(){
     await mongoose.connect(process.env.ATLASDB_URL);
 }
 
+app.get("/",(req,res)=>{
+    res.redirect("/listings");
+});
 
 app.use("/",userRoutes); 
 app.use("/listings",listingRoutes);
 
 app.use("/listings/:id/reviews",reviewRoutes);
 
-app.use("/",userRoutes);
 //
 
-//app.get("/",(req,res)=>{
-//  res.send("This is Root Page");
-//})
 
 app.use((req,res,next)=>{
     next(new ExpressError(404,"Page Not Found"));
