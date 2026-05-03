@@ -34,7 +34,7 @@ const sessionOptions = {
         crypto: {
             secret: process.env.SESSION_SECRET
         },
-        TouchAfter: 24 * 3600 // time period in seconds
+        touchAfter: 24 * 3600 // time period in seconds
     }),
     cookie: {
         httpOnly: true,
