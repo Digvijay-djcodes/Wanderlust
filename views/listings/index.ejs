@@ -1,6 +1,122 @@
 <% layout('layouts/boilerplate') %>
+<style>
+/* ============================= */
+/* DESKTOP SAFE (DO NOT TOUCH UI) */
+/* ============================= */
 
-<div id="filters">
+.tax-toggle {
+  margin: 10px 0;
+}
+
+.tax-toggle label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.tax-toggle input[type="checkbox"] {
+  margin-left: 6px;
+}
+
+
+/* ============================= */
+/* MOBILE UI (ONLY BELOW 768px) */
+/* ============================= */
+
+@media (max-width: 768px) {
+
+  /* ===== FILTER BAR ===== */
+  #filters {
+    display: flex !important;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 10px;
+
+    padding: 10px 12px;
+    margin: 10px 0;
+
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+
+    position: sticky;
+    top: 65px;
+    z-index: 999;
+
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* hide ugly scrollbar */
+  #filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* ===== FILTER ITEMS ===== */
+  #filters a {
+    flex: 0 0 auto;
+    min-width: 65px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 6px 4px;
+    border-radius: 10px;
+
+    background: #f7f7f7;
+    color: #444;
+    text-decoration: none;
+
+    font-size: 11px;
+  }
+
+
+  #filters i {
+    font-size: 15px;
+    margin-bottom: 2px;
+  }
+
+  #filters a:hover {
+    background: #eeeeee;
+  }
+
+  #filters a.active {
+    background: #ff385c;
+    color: white;
+  }
+
+  /* ===== TAX TOGGLE (FIXED CLEAN) ===== */
+  .tax-toggle {
+    display: flex;
+    justify-content: center;
+    margin: 12px 0 16px;
+  }
+
+  .tax-toggle label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 10px 14px;
+    border-radius: 999px;
+
+    background: #fff;
+    border: 1px solid #ddd;
+
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .tax-toggle input[type="checkbox"] {
+    margin: 0;
+    transform: scale(1.1);
+  }
+
+}
+</style>
+
+<div id="filters" class="filters-container">
     <a href="/listings?category=city" class="filter <%= category === 'city' ? 'active' : '' %> text-decoration-none text-dark">
     <div><i class="fa-solid fa-city"></i></div>
     <p>City</p>
@@ -55,13 +171,13 @@
     <div><i class="fa-solid fa-ship"></i></div>
     <p>Boats</p>
     </a>
+
     <div class="tax-toggle">
         <div class="form-check-reverse form-switch">
             <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
             <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label>
         </div>
     </div>
-    
 </div>
     
     <div class="row row-cols-lg-3  row-cols-md-2  row-cols-sm-1">
@@ -118,6 +234,21 @@ taxSwitch.addEventListener("change", function () {
     el.style.display = taxSwitch.checked ? "inline" : "none";
 });
 
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const btn = document.getElementById("filterToggleBtn");
+  const filters = document.getElementById("filters");
+
+  if (!btn || !filters) return;
+
+  btn.addEventListener("click", function () {
+    if (filters.style.display === "none" || filters.style.display === "") {
+      filters.style.display = "flex";
+    } else {
+      filters.style.display = "none";
+    }
+  });
 });
 </script>
     
