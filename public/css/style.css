@@ -237,3 +237,14 @@ footer{
 
 }
 
+/* alerts */
+@media (max-width: 480px) {
+  .alert {
+    font-size: 0.9rem;
+  }
+
+  .btn-close {
+    transform: scale(0.8);
+  }
+}
+
