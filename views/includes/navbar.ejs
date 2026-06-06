@@ -25,20 +25,48 @@
   .search-input {
     border-radius: 25px;
     border: 1px solid #ced4da;
-    padding: 0.5rem 3rem 0.5rem 3rem;
+    padding: 0.5rem 1rem;
     transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   }
+
+  .mobile-explore{
+    display:none;
+}
+
+@media (max-width:767px){
+
+    .mobile-explore{
+        display:block;
+        text-decoration:none;
+        color:#222;
+        font-size:15px;
+        margin-right:auto;
+        margin-left:0px;
+        font-weight:500;
+    }
+
+    .navbar-brand{
+        margin-right:6px;
+    }
+
+    .nav-link.explore{
+        display:none !important;
+    }
+    
+  
+}
 </style>
 
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
+    <a href="/listings" class="mobile-explore">Explore</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <div class="navbar-nav">
-          <a class="nav-link explore-mobile"  href="/listings">Explore</a>
+          <a class="nav-link explore"  href="/listings">Explore</a>
       </div>
       <div class="navbar-nav ms-auto me-auto mt-auto mb-auto">
           <form class="d-flex " role="search">
