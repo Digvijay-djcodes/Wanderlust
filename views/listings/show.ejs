@@ -142,6 +142,10 @@
     <br>
 
 <style>
+
+    
+
+
 .price-row {
   display: flex;
   align-items: center;
@@ -154,6 +158,7 @@
   align-items: center;
   gap: 10px;
 }
+
 
 /* SWITCH */
 .switch {
@@ -202,9 +207,31 @@ input:checked + .slider:before {
 }
 
 .toggle-text {
-  font-size: 0.9rem;
+  font-size:clamp(12px, 1.5vw, 14px);
+  
   color: #555;
 }
+
+@media(max-width:480px){
+
+  .switch{
+        width:50px;
+        height:20px;
+    }
+
+    .slider:before{
+        width:12px;
+        height:12px;
+    }
+
+    input:checked + .slider:before{
+        transform:translateX(9.5px);
+    }
+
+
+
+}
+
 </style>
 
 <script>
